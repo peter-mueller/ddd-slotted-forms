@@ -1,0 +1,40 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
+
+
+
+<dom-module id="special-destination-input">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+        <paper-radio-group selected="{{value.Destination}}">
+          <paper-radio-button name="Munich">München</paper-radio-button>
+          <paper-radio-button name="Allgäu">Allgäu</paper-radio-button>
+        </paper-radio-group>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class SpecialDestinationInput extends Polymer.Element {
+      static get is() { return 'special-destination-input'; }
+      static get properties() {
+        return {
+            value: {
+                type: Object,
+                notify: true,
+            }
+        };
+      }
+    }
+
+    window.customElements.define(SpecialDestinationInput.is, SpecialDestinationInput);
+  </script>
+</dom-module>

@@ -1,0 +1,52 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+
+<link rel="import" href="../cargo/cargo-input.html">
+<link rel="import" href="../cargo/special-destination-input.html">
+
+
+
+<dom-module id="ddd-slotted-forms-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Create a new Cargo</h2>
+    <cargo-input id="cargo" value="{{value}}">
+      <special-destination-input value="{{value.RouteSpecification}}" slot="RouteSpecification.Destination"></special-destination-input>
+    </cargo-input>
+
+    <paper-button on-click="reset">RESET</paper-button>
+
+    <div>[[_string(value.*)]]</div>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class DddSlottedFormsApp extends Polymer.Element {
+      static get is() { return 'ddd-slotted-forms-app'; }
+      static get properties() {
+        return {
+        };
+      }
+
+      reset() {
+        this.$.cargo.reset();
+      }
+
+      _string(value) {
+        return JSON.stringify(value.base);
+      }
+    }
+
+    window.customElements.define(DddSlottedFormsApp.is, DddSlottedFormsApp);
+  </script>
+</dom-module>

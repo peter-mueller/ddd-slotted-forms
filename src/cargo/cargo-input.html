@@ -1,0 +1,58 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<link rel="import" href="route-specification-input.html">
+
+
+<dom-module id="cargo-input">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <paper-input required error-message="required" auto-validate allowed-pattern="[0-9]" id="CargoID" label="CargoID" type="text" value="{{value.CargoID}}"></paper-input>
+    <route-specification-input id="RouteSpecification" value="{{value.RouteSpecification}}">
+      <slot name="RouteSpecification.Destination" slot="Destination"></slot>
+    </route-specification-input>
+    <slot></slot>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class CargoInput extends Polymer.Element {
+      static get is() { return 'cargo-input'; }
+      static get defaultValue() {
+        return {
+          CargoID: null,
+          RouteSpecification: {
+            Origin: null,
+            Destination: null,
+            Time: null,
+          }
+        }
+      }
+      static get properties() {
+        return {
+          value: {
+            type: Object,
+            notify: true,
+            value: CargoInput.defaultValue
+          }
+        };
+      }
+
+      reset() {
+        this.value = CargoInput.defaultValue
+        this.$.CargoID.invalid=false;
+        this.$.RouteSpecification.reset();
+      }
+    }
+
+    window.customElements.define(CargoInput.is, CargoInput);
+  </script>
+</dom-module>

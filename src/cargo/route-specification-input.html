@@ -1,0 +1,53 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+
+<dom-module id="route-specification-input">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <paper-input label="Origin" id="Origin" type="text" value="{{value.Origin}}"></paper-input>
+    <paper-input label="Destination (evtl. mit css dann ausblenden,  oder garnicht erst generieren)" id="Destination" type="text"  value="{{value.Destination}}"></paper-input>
+    <slot name="Destination"></slot>
+    <paper-input label="Time" id="Time" type="time" value="{{value.Time}}"></paper-input>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class RouteSpecificationInput extends Polymer.Element {
+      static get is() { return 'route-specification-input'; }
+      static get defaultValue() {
+          return {
+            Origin: null,
+            Destination: null,
+            Time: null,
+          }
+      }
+      static get properties() {
+        return {
+            value: {
+              type: Object,
+              notify: true,
+              value: RouteSpecificationInput.defaultValue
+            },
+        };
+      }
+
+      reset() {
+        this.value = RouteSpecificationInput.defaultValue;
+        this.$.Origin.invalid = false;
+        this.$.Destination.invalid = false;
+        this.$.Time.invalid = false;
+      }
+    }
+
+    window.customElements.define(RouteSpecificationInput.is, RouteSpecificationInput);
+  </script>
+</dom-module>
